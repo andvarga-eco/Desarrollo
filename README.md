@@ -7,3 +7,5 @@ Tema 1: [¿Qué es el desarrollo?](https://uninorte-my.sharepoint.com/:b:/g/pers
 
 Tema 2: [Crecimiento económico](https://uninorte-my.sharepoint.com/:b:/g/personal/andresmv_uninorte_edu_co/EW4HRztCOYpHrl7tdTfYqFYBxPK8K5EIINKgXczJt-uVNQ?e=SPf1A6)
 
+Tema 3: [Trampas de desarrollo](https://uninorte-my.sharepoint.com/:b:/g/personal/andresmv_uninorte_edu_co/EeWG2bRa9xxAqY4J0nuCYhcBCnZ-UerOTWo_xQ3qAtnUmg?e=D0zBTl)
+
