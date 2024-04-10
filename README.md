@@ -9,3 +9,5 @@ Tema 2: [Crecimiento económico](https://uninorte-my.sharepoint.com/:b:/g/person
 
 Tema 3: [Trampas de desarrollo](https://uninorte-my.sharepoint.com/:b:/g/personal/andresmv_uninorte_edu_co/EeWG2bRa9xxAqY4J0nuCYhcBCnZ-UerOTWo_xQ3qAtnUmg?e=D0zBTl)
 
+Tema 4: [Desigualdad de ingresos](https://uninorte-my.sharepoint.com/:b:/g/personal/andresmv_uninorte_edu_co/EQopcToHO59Eru_fMtrXH2gBT_DRdYC3AJnAV-GavzPYQA?e=ABkE6f)
+
