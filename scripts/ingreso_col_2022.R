@@ -1,0 +1,70 @@
+here::i_am("scripts/ingreso_col_2022.R")
+library(here)
+here()
+library(haven)
+library(dplyr)
+library(ggplot2)
+
+per<-read_dta(here("datos","PERSONAS.dta"))
+hog<-read_dta(here("datos","HOGARES.dta"))
+
+per<-per%>%select(c(directorio,secuencia_p,p6040,p6050,impa,isa,ie,imdi,iof1,iof2,iof3h,iof3i,iof6,
+                    impaes,isaes,iees,imdies,iof1es,iof2es,iof3hes,iof3ies,iof6es,ingtotob,ingtotes,ingtot,fex_c))
+hog<-hog%>%select(c(directorio,secuencia_p,npersug,ingtotug,ingtotugarr,ingpcug,li,lp,pobre,indigente,npobres,nindigentes))
+
+comb<-per%>%left_join(hog,by=c("directorio","secuencia_p"))
+
+# Densidad ingreso por unidad de gasto
+
+mean(comb$ingpcug)
+quantile(comb$ingpcug,probs=c(0.25,0.5,0.75,0.9))
+
+ggplot(comb,aes(x=ingpcug))+geom_density()+geom_vline(xintercept=mean(comb$ingpcug),linetype="dashed", colour="blue")+
+  geom_vline(xintercept=median(comb$ingpcug),linetype="dashed",colour="red")
+
+ggplot(comb,aes(x=ingpcug))+geom_density(fill="gray")+coord_cartesian(xlim = c(0, 10000000))+theme_classic()+
+  geom_vline(xintercept=mean(comb$ingpcug),linetype="dashed", colour="blue")+
+  geom_vline(xintercept=median(comb$ingpcug),linetype="dashed",colour="red")
+
+ggplot(comb,aes(x=ingpcug))+geom_density(fill="gray")+coord_cartesian(xlim = c(0, 1000000))+theme_classic()+
+  geom_vline(xintercept=mean(comb$ingpcug),linetype="dashed", colour="blue")+
+  geom_vline(xintercept=median(comb$ingpcug),linetype="dashed",colour="red")+
+  geom_vline(xintercept=mean(comb$lp),linetype="dashed",colour="green")+
+  geom_vline(xintercept=mean(comb$li),linetype="dashed",colour="yellow")
+
+# Composición del ingreso por hogar
+
+comb[is.na(comb)]<-0
+compy<-comb%>%group_by(directorio, secuencia_p)%>%summarise(ylab=sum(impa, na.rm=TRUE)+sum(impaes,na.rm=TRUE)+sum(isa,na.rm=TRUE)+sum(isaes,rm=TRUE)+sum(imdi,na.rm=TRUE)+
+                                                             sum(imdies,na.rm=TRUE),
+                                                            yk=sum(iof1,na.rm=TRUE)+sum(iof1es,na.rm=TRUE)+sum(iof6,na.rm=TRUE)+sum(iof6es),
+                                                            ytr=sum(iof3i,na.rm=TRUE)+sum(iof3ies,na.rm=TRUE),
+                                                            ingtotugarr=mean(ingtotugarr),ingpcug=mean(ingpcug),
+                                                            pobre=mean(pobre))%>%ungroup()
+compy<-compy%>%mutate(yresto=ingtotugarr-ylab+1-yk-ytr,
+                      ylabp=ylab/ingtotugarr,
+                      ykp=yk/ingtotugarr,
+                      ytrp=ytr/ingtotugarr,
+                      yrestop=yresto/ingtotugarr)
+compy<-compy%>%filter(ingtotugarr>0)
+
+compyt<-compy%>%group_by(pobre)%>%summarise(ylab=mean(ylabp),yk=mean(ykp),ytr=mean(ytrp),yresto=mean(yrestop))
+
+# Curva de lorenz
+lorenz<-compy[order(compy$ingtotugarr),]
+g10<-round(nrow(lorenz)/10)
+lorenz["grupo"]<-0
+
+    lorenz[1:g10,14]<-1
+    for(i in 1:9){
+      f<-(g10*i)+1
+      l<-(i+1)*g10
+      g<-i+1
+    lorenz[f:l,14]<-i+1
+    }
+    lorenz[284191,14]<-10
+  
+  lorenzs<-lorenz%>%group_by(grupo)%>%summarise(ingd=sum(ingtotugarr))%>%ungroup()%>%mutate(ingdc=cumsum(ingd))
+  lorenzs<-lorenzs%>%mutate(indgp=ingd/sum(ingd), ingdcp=ingdc/sum(ingd))
+plot(lorenzs$ingdcp,type="line",col="blue",lwd=2,xlim=c(0,10))
+abline(a = 0, b = 0.1, col = "black", lwd = 2,xlim=c(0,10),ylim=c(0,1))
