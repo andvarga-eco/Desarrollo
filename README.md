@@ -11,3 +11,5 @@ Tema 3: [Trampas de desarrollo](https://uninorte-my.sharepoint.com/:b:/g/persona
 
 Tema 4: [Desigualdad de ingresos](https://uninorte-my.sharepoint.com/:b:/g/personal/andresmv_uninorte_edu_co/EQopcToHO59Eru_fMtrXH2gBT_DRdYC3AJnAV-GavzPYQA?e=ABkE6f)
 
+Tema 5: [Crédito](https://uninorte-my.sharepoint.com/:b:/g/personal/andresmv_uninorte_edu_co/ESieZ25mc2dLhmLKYBvu--4BtP_8cliwPFV_ZvDkIcKfYA?e=PJXOez)
+
