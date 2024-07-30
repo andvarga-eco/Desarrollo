@@ -4,6 +4,8 @@ here()
 library(haven)
 library(dplyr)
 library(ggplot2)
+library(dineq)
+library(DescTools)
 
 per<-read_dta(here("datos","PERSONAS.dta"))
 hog<-read_dta(here("datos","HOGARES.dta"))
@@ -18,6 +20,8 @@ comb<-per%>%left_join(hog,by=c("directorio","secuencia_p"))
 
 mean(comb$ingpcug)
 quantile(comb$ingpcug,probs=c(0.25,0.5,0.75,0.9))
+Quantile(comb$ingpcug,weights=comb$fex_c,probs=c(0.25,0.5,0.75,0.9))
+
 
 ggplot(comb,aes(x=ingpcug))+geom_density()+geom_vline(xintercept=mean(comb$ingpcug),linetype="dashed", colour="blue")+
   geom_vline(xintercept=median(comb$ingpcug),linetype="dashed",colour="red")
@@ -26,11 +30,20 @@ ggplot(comb,aes(x=ingpcug))+geom_density(fill="gray")+coord_cartesian(xlim = c(0
   geom_vline(xintercept=mean(comb$ingpcug),linetype="dashed", colour="blue")+
   geom_vline(xintercept=median(comb$ingpcug),linetype="dashed",colour="red")
 
-ggplot(comb,aes(x=ingpcug))+geom_density(fill="gray")+coord_cartesian(xlim = c(0, 1000000))+theme_classic()+
-  geom_vline(xintercept=mean(comb$ingpcug),linetype="dashed", colour="blue")+
+ggplot(comb,aes(x=ingpcug, weight=fex_c))+geom_density(fill="gray")+coord_cartesian(xlim = c(0, 1000000))+theme_classic()+
+  geom_vline(xintercept=weighted.mean(comb$ingpcug,comb$fex_c),linetype="dashed", colour="blue")+
   geom_vline(xintercept=median(comb$ingpcug),linetype="dashed",colour="red")+
   geom_vline(xintercept=mean(comb$lp),linetype="dashed",colour="green")+
   geom_vline(xintercept=mean(comb$li),linetype="dashed",colour="yellow")
+
+
+ggplot(comb,aes(x=ingpcug, weight=fex_c))+geom_histogram(fill="gray",binwidth=100000,color="white")+coord_cartesian(xlim = c(0, 5000000))+
+  theme_classic()+
+  geom_vline(xintercept=weighted.mean(comb$ingpcug,comb$fex_c),linetype="dashed", colour="blue")+
+  geom_vline(xintercept=median(comb$ingpcug),linetype="dashed",colour="red")+
+  geom_vline(xintercept=mean(comb$lp),linetype="dashed",colour="green")+
+  geom_vline(xintercept=mean(comb$li),linetype="dashed",colour="yellow")
+
 
 # Composición del ingreso por hogar
 
@@ -51,7 +64,7 @@ compy<-compy%>%filter(ingtotugarr>0)
 compyt<-compy%>%group_by(pobre)%>%summarise(ylab=mean(ylabp),yk=mean(ykp),ytr=mean(ytrp),yresto=mean(yrestop))
 
 # Curva de lorenz
-lorenz<-compy[order(compy$ingtotugarr),]
+lorenz<-compy[order(compy$ylab),]
 g10<-round(nrow(lorenz)/10)
 lorenz["grupo"]<-0
 
@@ -64,7 +77,13 @@ lorenz["grupo"]<-0
     }
     lorenz[284191,14]<-10
   
-  lorenzs<-lorenz%>%group_by(grupo)%>%summarise(ingd=sum(ingtotugarr))%>%ungroup()%>%mutate(ingdc=cumsum(ingd))
-  lorenzs<-lorenzs%>%mutate(indgp=ingd/sum(ingd), ingdcp=ingdc/sum(ingd))
-plot(lorenzs$ingdcp,type="line",col="blue",lwd=2,xlim=c(0,10))
-abline(a = 0, b = 0.1, col = "black", lwd = 2,xlim=c(0,10),ylim=c(0,1))
+lorenzs<-lorenz%>%group_by(grupo)%>%summarise(ingd=sum(ylab))%>%ungroup()%>%mutate(ingdc=cumsum(ingd))
+lorenzs<-lorenzs%>%mutate(indgp=ingd/sum(ingd), ingdcp=ingdc/sum(ingd))
+new_row<-c(grupo=0,ingd=0,ingdc=0,ingp=0,ingdcp=0)
+lorenzs<-rbind(lorenzs,new_row)
+lorenzs<-lorenzs[order(lorenzs$grupo),]
+plot(lorenzs$grupo,lorenzs$ingdcp,type="line",col="blue",lwd=2,xlim=c(0,10))
+curve(0.1*x,add=TRUE,lwd=2)
+
+gini.wtd(compy$ingtotugarr)
+gini.wtd(compy$ylab)
