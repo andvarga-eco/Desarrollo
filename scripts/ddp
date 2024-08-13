@@ -1,0 +1,39 @@
+library(LSMRealOptions)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(writexl)
+
+n<-50
+t<-30
+
+simulated <- GBM_simulate(n = n,
+                         t = t,
+                         mu = 0.05,
+                         sigma = 0.2,
+                         S0 = 100,
+                         dt = 1)
+
+simulated<-data.frame(simulated)
+
+Xpc<-rowMeans(simulated)
+
+
+simulated<-simulated%>%mutate(t=seq(from=0, to=30, by=1))
+simulated<-cbind(Xpc,simulated)
+#write_xlsx(simulated,"C:/Users/andre/OneDrive/Desktop/simulated.xlsx")
+
+
+
+sim_long<-pivot_longer(simulated,cols=starts_with("X"),
+                       names_to="id",
+                       values_to="ingreso")
+
+sim_long<-sim_long%>%group_by(id)%>%mutate(ding=ingreso/lag(ingreso,30))%>%ungroup
+ddp<-sim_long%>%filter(t==30)
+ddp<-ddp%>%mutate(g=ding^(1/10)-1)
+ddpg<-ddp%>%filter(id!="Xpc")%>%summarise(mean(g))
+
+ggplot(sim_long,aes(x=t,y=ingreso,color=id))+geom_line()+theme(legend.position = "none")+geom_hline(yintercept = 100)
+
+sim_long%>%filter(t==30)%>%ggplot(aes(x=ingreso))+geom_density()
