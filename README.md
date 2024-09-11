@@ -12,3 +12,5 @@ Tema 3: [Cambio estructural](https://uninorte-my.sharepoint.com/:b:/g/personal/a
 ## Laboratorios
 
 Lab 1: [Ingresos, distribución y evolución](https://uninorte-my.sharepoint.com/:b:/g/personal/andresmv_uninorte_edu_co/EcDz2tzTTlFFuwjn_jiNG8cB3Exkmyv9GtsVFa83OIczng?e=6ymqLE)
+
+Lab 2: [Cambio estructural](https://uninorte-my.sharepoint.com/:b:/g/personal/andresmv_uninorte_edu_co/ESrTrIIBxh9HvaGUcDySc1oBUOrWGTFKG7EYcQViQXUceg?e=7LDTnh)
