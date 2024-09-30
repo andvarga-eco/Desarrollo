@@ -9,6 +9,8 @@ Tema 2: [Crecimiento económico](https://uninorte-my.sharepoint.com/:b:/g/person
 
 Tema 3: [Cambio estructural](https://uninorte-my.sharepoint.com/:b:/g/personal/andresmv_uninorte_edu_co/EVJwzsRMQL9OnKV_xjTBobgBlut7PxNdYUHPRew_dzZtHQ?e=NNcbdN)
 
+Tema 4: [Política industrial](https://uninorte-my.sharepoint.com/:b:/g/personal/andresmv_uninorte_edu_co/EZym1G3yLOBGsCUlB_QY-EMB-MvTvpAkexti9GncPfFR1w?e=2RMlYZ)
+
 ## Laboratorios
 
 Lab 1: [Ingresos, distribución y evolución](https://uninorte-my.sharepoint.com/:b:/g/personal/andresmv_uninorte_edu_co/EcDz2tzTTlFFuwjn_jiNG8cB3Exkmyv9GtsVFa83OIczng?e=6ymqLE)
