@@ -12,6 +12,8 @@ Tema 3: [Cambio estructural](https://uninorte-my.sharepoint.com/:b:/g/personal/a
 Tema 4: [Política industrial](https://uninorte-my.sharepoint.com/:b:/g/personal/andresmv_uninorte_edu_co/EZym1G3yLOBGsCUlB_QY-EMB-MvTvpAkexti9GncPfFR1w?e=2RMlYZ)
 
 Tema 5: [Tecnología, mercado laboral, desigualdad](https://uninorte-my.sharepoint.com/:b:/g/personal/andresmv_uninorte_edu_co/ETHMYsqCkapLsX77tzp0wmUBSlfkJAhT1jeo8AHkWaq-eg?e=Zixz28)
+
+Tema 6: [Informalidad](https://uninorte-my.sharepoint.com/:b:/g/personal/andresmv_uninorte_edu_co/EWjVGaXaNj5NknF3IuiO8iUBYOmpSMuIOzqr8-ZPHyqZpA?e=DQu8Z3)
 ## Laboratorios
 
 Lab 1: [Ingresos, distribución y evolución](https://uninorte-my.sharepoint.com/:b:/g/personal/andresmv_uninorte_edu_co/EcDz2tzTTlFFuwjn_jiNG8cB3Exkmyv9GtsVFa83OIczng?e=6ymqLE)
