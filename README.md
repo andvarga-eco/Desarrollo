@@ -21,3 +21,5 @@ Lab 1: [Ingresos, distribución y evolución](https://uninorte-my.sharepoint.com
 Lab 2: [Cambio estructural](https://uninorte-my.sharepoint.com/:b:/g/personal/andresmv_uninorte_edu_co/ESrTrIIBxh9HvaGUcDySc1oBUOrWGTFKG7EYcQViQXUceg?e=7LDTnh)
 
 Lab 3: [Rendimientos crecientes](https://uninorte-my.sharepoint.com/:b:/g/personal/andresmv_uninorte_edu_co/ESpmjIHw1E9LvwJ-cPTy6uYB-VDE76M0ps4PgEOvhprHRg?e=8zAPit)
+
+Lab 4: [Informalidad empresarial](https://uninorte-my.sharepoint.com/:w:/g/personal/andresmv_uninorte_edu_co/EUZacLvcnJtPoxa-Cc4pGtkB6rPcU_X0Ub9lY-OvU1fzjQ?e=Isk55f)
